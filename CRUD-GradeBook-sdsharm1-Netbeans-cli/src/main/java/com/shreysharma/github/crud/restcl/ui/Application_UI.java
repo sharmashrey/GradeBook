@@ -28,7 +28,7 @@ import javax.swing.ButtonGroup;
  */
 public class Application_UI extends javax.swing.JFrame {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Gradebook_REST_UI.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Application_UI.class);
     
     private final Gradebook_CRUD_cl gradebook_CRUD_rest_client;
     
