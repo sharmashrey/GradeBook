@@ -738,14 +738,16 @@
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jTextFinalgradeField2" min="-2" pref="201" max="-2" attributes="0"/>
                                           <Component id="jTextField4" min="-2" pref="201" max="-2" attributes="0"/>
@@ -764,7 +766,7 @@
                               <Component id="jButton1" min="-2" pref="312" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
@@ -900,9 +902,9 @@
                                   <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextClasFeed" alignment="3" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jTextAssFeed" alignment="0" min="-2" pref="49" max="-2" attributes="0"/>
+                                  <Component id="jTextClasFeed" min="-2" pref="49" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -931,9 +933,9 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="3" attributes="0">
-                                                  <Component id="jLabel46" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jTextFinMrk" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel46" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
@@ -1018,7 +1020,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField7">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy HH:mm:ss"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="PriorityField" noResource="true"/>
               </Properties>
               <Events>
@@ -1041,6 +1043,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextStudentidField1">
               <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="For Checking existing Entries"/>
                 <Property name="name" type="java.lang.String" value="IdField" noResource="true"/>
               </Properties>
               <Events>
@@ -1057,7 +1060,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField4">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy HH:mm:ss"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="PriorityField" noResource="true"/>
               </Properties>
               <Events>
@@ -1178,7 +1181,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextClasFeed">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy HH:mm:ss"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="PriorityField" noResource="true"/>
               </Properties>
               <Events>
@@ -1205,7 +1208,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextMidtMrk">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy HH:mm:ss"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="PriorityField" noResource="true"/>
               </Properties>
               <Events>
@@ -1219,7 +1222,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextMidtFeed">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy HH:mm:ss"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="PriorityField" noResource="true"/>
               </Properties>
               <Events>
@@ -1236,7 +1239,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextAssFeed">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy HH:mm:ss"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="PriorityField" noResource="true"/>
               </Properties>
               <Events>
@@ -1255,7 +1258,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextAssMarks">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy HH:mm:ss"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="PriorityField" noResource="true"/>
               </Properties>
               <Events>
@@ -1264,7 +1267,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextQuizFeed">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy HH:mm:ss"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="PriorityField" noResource="true"/>
               </Properties>
               <Events>
@@ -1291,7 +1294,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextQuizMark">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy HH:mm:ss"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="PriorityField" noResource="true"/>
               </Properties>
               <Events>
@@ -1300,7 +1303,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFinFeed">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy HH:mm:ss"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="PriorityField" noResource="true"/>
               </Properties>
               <Events>
@@ -1327,7 +1330,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="jTextFinMrk">
               <Properties>
-                <Property name="toolTipText" type="java.lang.String" value="dd/MM/yyyy HH:mm:ss"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
                 <Property name="name" type="java.lang.String" value="PriorityField" noResource="true"/>
               </Properties>
               <Events>

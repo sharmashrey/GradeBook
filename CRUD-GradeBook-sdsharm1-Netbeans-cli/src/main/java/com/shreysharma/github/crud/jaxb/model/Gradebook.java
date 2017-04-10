@@ -193,7 +193,7 @@ public class Gradebook {
     public String toString() {
         return "Gradebook{" + "id="+id+ ", finalgrade=" + finalgrade + ", priority=" + priority + ", assignment=" + assignment +
                 ", assignMark=" + assignMark + ", assignFeed=" + assignFeed + ", midtermMark=" + midtermMark + ", midtermFeed=" + midtermFeed +
-                ", quizMark=" + quizMark + ", quizFeed=" + quizFeed + ", inclasslabsMark"+ inclasslabsMark + ", inclasslabsFeed"+ inclasslabsFeed + 
+                ", quizMark=" + quizMark + ", quizFeed=" + quizFeed + ", inclasslabsMark="+ inclasslabsMark + ", inclasslabsFeed="+ inclasslabsFeed + 
                 ", finalMark=" + finalMark +", finalFeed=" + finalFeed +'}';
     }
     
