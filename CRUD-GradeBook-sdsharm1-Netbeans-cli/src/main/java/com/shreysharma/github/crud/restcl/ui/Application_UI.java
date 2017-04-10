@@ -50,7 +50,6 @@ public class Application_UI extends javax.swing.JFrame {
             if (!jTextStudentidField1.getText().equals(""))gradebook.setId(Integer.parseInt(jTextStudentidField1.getText()));
             
             //ONLY RUN IF TITLE IS PRESENT
-            if(!jTextField7.getText().equals("") ){
             gradebook.setFinalgrade(jTextFinalgradeField2.getText());
             gradebook.setPriority(Integer.parseInt(jTextField4.getText()));
             
@@ -67,7 +66,7 @@ public class Application_UI extends javax.swing.JFrame {
             if (!jTextFinFeed.getText().equals(""))gradebook.setFinalFeed(jTextFinFeed.getText());
 
             xmlString = Converter.convertFromObjectToXml(gradebook, gradebook.getClass());
-            }
+            
         }
         
         //if UPDATE RADIO BUTTON is selected
@@ -78,6 +77,18 @@ public class Application_UI extends javax.swing.JFrame {
             }
             gradebook.setFinalgrade(jTextFinalgradeField2.getText());
             gradebook.setPriority(Integer.parseInt(jTextField4.getText()));
+            
+                //Check for inserting the Assignment, Lab ,quiz, mid, fin
+            if (!jTextAssMarks.getText().equals(""))gradebook.setAssignMark(Integer.parseInt(jTextAssMarks.getText()));
+            if (!jTextAssFeed.getText().equals(""))gradebook.setAssignFeed(jTextAssFeed.getText());
+            if (!jTextClassMrk.getText().equals(""))gradebook.setInclasslabsMark(Integer.parseInt(jTextClassMrk.getText()));
+            if (!jTextClasFeed.getText().equals(""))gradebook.setInclasslabsFeed(jTextClasFeed.getText());
+            if (!jTextQuizMark.getText().equals(""))gradebook.setQuizMark(Integer.parseInt(jTextQuizMark.getText()));
+            if (!jTextQuizFeed.getText().equals(""))gradebook.setQuizFeed(jTextQuizFeed.getText());
+            if (!jTextMidtMrk.getText().equals(""))gradebook.setMidtermMark(Integer.parseInt(jTextMidtMrk.getText()));
+            if (!jTextMidtFeed.getText().equals(""))gradebook.setMidtermFeed(jTextMidtFeed.getText());
+            if (!jTextFinMrk.getText().equals(""))gradebook.setFinalMark(Integer.parseInt(jTextFinMrk.getText()));
+            if (!jTextFinFeed.getText().equals(""))gradebook.setFinalFeed(jTextFinFeed.getText());
 
              xmlString = Converter.convertFromObjectToXml(gradebook, gradebook.getClass());
         }
@@ -92,7 +103,6 @@ public class Application_UI extends javax.swing.JFrame {
 
              xmlString = Converter.convertFromObjectToXml(gradebook, gradebook.getClass());
         }
-        
         return xmlString;
     }
 
@@ -127,6 +137,16 @@ public class Application_UI extends javax.swing.JFrame {
             } else {
                 jTextFinalgradeField2.setText("");
                 jTextField4.setText("");
+                jTextAssMarks.setText("");
+                jTextAssFeed.setText("");
+                jTextClassMrk.setText("");
+                jTextClasFeed.setText("");
+                jTextQuizMark.setText("");
+                jTextQuizFeed.setText("");
+                jTextMidtMrk.setText("");
+                jTextMidtFeed.setText("");
+                jTextFinMrk.setText(""); 
+                jTextFinFeed.setText("");
             }
             
             // Populate HTTP Header Information
@@ -213,7 +233,6 @@ public class Application_UI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jTextField6 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
         jTextClassMrk = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextStudentidField1 = new javax.swing.JTextField();
@@ -745,15 +764,7 @@ public class Application_UI extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("Title");
-
-        jTextField7.setToolTipText("");
-        jTextField7.setName("PriorityField"); // NOI18N
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
-            }
-        });
+        jLabel11.setText("Assignment");
 
         jTextClassMrk.setToolTipText("dd/MM/yyyy HH:mm:ss");
         jTextClassMrk.setName("PriorityField"); // NOI18N
@@ -989,7 +1000,6 @@ public class Application_UI extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextFinalgradeField2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextStudentidField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(104, 104, 104)
@@ -1168,7 +1178,6 @@ public class Application_UI extends javax.swing.JFrame {
                             .addComponent(jRadioButton3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11)
                             .addComponent(jRadioButton4)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1354,7 +1363,7 @@ public class Application_UI extends javax.swing.JFrame {
             LOG.debug("Invoking {} action", jRadioButton2.getText());// Read
 
             ClientResponse clientResponse = gradebook_CRUD_rest_client.retrieveGradebook(ClientResponse.class,gradebookID);
-
+            
             this.populateForm(clientResponse);
         } else if (jRadioButton3.isSelected()) {
             LOG.debug("Invoking {} action", jRadioButton3.getText());//Update
@@ -1366,7 +1375,7 @@ public class Application_UI extends javax.swing.JFrame {
             LOG.debug("Invoking {} action", jRadioButton4.getText());//Delete
 
             ClientResponse clientResponse = gradebook_CRUD_rest_client.deleteGradebook(gradebookID);
-            //  this.populateForm(clientResponse);
+      //       this.populateForm(clientResponse);
             //have to change response that got from DELETE
         }
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -1386,10 +1395,6 @@ public class Application_UI extends javax.swing.JFrame {
     private void jTextClassMrkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextClassMrkActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextClassMrkActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
@@ -1557,7 +1562,6 @@ public class Application_UI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextFinFeed;
     private javax.swing.JTextField jTextFinMrk;
     private javax.swing.JTextField jTextFinalgradeField2;

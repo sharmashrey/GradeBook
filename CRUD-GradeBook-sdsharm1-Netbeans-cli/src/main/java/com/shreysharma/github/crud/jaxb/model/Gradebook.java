@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
     "id",
     "finalgrade",
     "priority",
-    "assignment",
     "assignMark",
     "assignFeed",
     "midtermMark",
@@ -37,7 +36,7 @@ public class Gradebook {
     private String      finalgrade;
     private int         priority;
     
-    private int        assignment; //check
+  //  private int        assignment; //check
     
     private int        assignMark;
     private String     assignFeed;
@@ -108,7 +107,7 @@ public class Gradebook {
     }
 
     
-    public int getAssignment() {
+   /* public int getAssignment() {
         return assignment;
     }
 
@@ -116,7 +115,7 @@ public class Gradebook {
     public void setAssignment(int assignment) {
         this.assignment = assignment;
          LOG.debug("The updated gradebook = {}", this);
-    }
+    }*/
 
     public int getMidtermMark() {
         return midtermMark;
@@ -191,7 +190,7 @@ public class Gradebook {
 
     @Override
     public String toString() {
-        return "Gradebook{" + "id="+id+ ", finalgrade=" + finalgrade + ", priority=" + priority + ", assignment=" + assignment +
+        return "Gradebook{" + "id="+id+ ", finalgrade=" + finalgrade + ", priority=" + priority + 
                 ", assignMark=" + assignMark + ", assignFeed=" + assignFeed + ", midtermMark=" + midtermMark + ", midtermFeed=" + midtermFeed +
                 ", quizMark=" + quizMark + ", quizFeed=" + quizFeed + ", inclasslabsMark="+ inclasslabsMark + ", inclasslabsFeed="+ inclasslabsFeed + 
                 ", finalMark=" + finalMark +", finalFeed=" + finalFeed +'}';

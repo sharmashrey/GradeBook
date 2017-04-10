@@ -58,6 +58,7 @@ public class Gradebook_CRUD_cl {
         LOG.info("Initiating a Delete request");
         LOG.debug("Id = {}", id);
         
+   
         return webResource.path(id).delete(ClientResponse.class);
     }
 

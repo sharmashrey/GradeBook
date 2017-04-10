@@ -225,9 +225,19 @@ public class GradebookResource {
                             LOG.info("Creating a {} {} Status Response", Response.Status.OK.getStatusCode(), Response.Status.OK.getReasonPhrase());
                             LOG.debug("Retrieving the Gradebook Resource ID {}", gradebooklist.get(i).getId() );
                             //override all the values 
-                            gradebooklist.get(i).setAssignment(gradebook.getAssignment()) ; 
                             gradebooklist.get(i).setPriority(gradebook.getPriority());
                             gradebooklist.get(i).setFinalgrade(gradebook.getFinalgrade());
+                          
+                            gradebooklist.get(i).setAssignFeed(gradebook.getAssignFeed());
+                            gradebooklist.get(i).setAssignMark(gradebook.getAssignMark());
+                            gradebooklist.get(i).setFinalMark(gradebook.getFinalMark());
+                            gradebooklist.get(i).setFinalFeed(gradebook.getFinalFeed());
+                            gradebooklist.get(i).setInclasslabsMark(gradebook.getInclasslabsMark());
+                            gradebooklist.get(i).setInclasslabsFeed(gradebook.getInclasslabsFeed());
+                            gradebooklist.get(i).setMidtermFeed(gradebook.getMidtermFeed());
+                            gradebooklist.get(i).setMidtermMark(gradebook.getMidtermMark());
+                            gradebooklist.get(i).setQuizFeed(gradebook.getQuizFeed());
+                            gradebooklist.get(i).setQuizMark(gradebook.getQuizMark());
                             
                             String xmlString = Converter.convertFromObjectToXml(gradebooklist.get(i), Gradebook.class);
                             response = Response.status(Response.Status.OK).entity(xmlString).build();
