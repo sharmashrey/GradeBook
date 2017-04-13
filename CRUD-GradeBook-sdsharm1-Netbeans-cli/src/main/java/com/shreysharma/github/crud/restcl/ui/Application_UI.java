@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import com.shreysharma.github.crud.restcl.Gradebook_CRUD_cl;
 import com.shreysharma.github.crud.jaxb.model.Gradebook;
 import com.shreysharma.github.crud.jaxb.utils.Converter;
+import com.sun.jersey.api.client.UniformInterfaceException;
 import javax.swing.ButtonGroup;
 /**
  *
@@ -48,12 +49,12 @@ public class Application_UI extends javax.swing.JFrame {
         String xmlString = null;
         if(jRadioButton1.isSelected() ){
             if (!jTextStudentidField1.getText().equals(""))gradebook.setId(Integer.parseInt(jTextStudentidField1.getText()));
-            
+            if(jTextField4.getText()!=""){
             //ONLY RUN IF TITLE IS PRESENT
             gradebook.setFinalgrade(jTextFinalgradeField2.getText());
-            gradebook.setPriority(Integer.parseInt(jTextField4.getText()));
+            gradebook.setPriority(jTextField4.getText());
             
-            //Check for inserting the Assignment, Lab ,quiz, mid, fin
+           try{ //Check for inserting the Assignment, Lab ,quiz, mid, fin
             if (!jTextAssMarks.getText().equals(""))gradebook.setAssignMark(Integer.parseInt(jTextAssMarks.getText()));
             if (!jTextAssFeed.getText().equals(""))gradebook.setAssignFeed(jTextAssFeed.getText());
             if (!jTextClassMrk.getText().equals(""))gradebook.setInclasslabsMark(Integer.parseInt(jTextClassMrk.getText()));
@@ -64,8 +65,11 @@ public class Application_UI extends javax.swing.JFrame {
             if (!jTextMidtFeed.getText().equals(""))gradebook.setMidtermFeed(jTextMidtFeed.getText());
             if (!jTextFinMrk.getText().equals(""))gradebook.setFinalMark(Integer.parseInt(jTextFinMrk.getText()));
             if (!jTextFinFeed.getText().equals(""))gradebook.setFinalFeed(jTextFinFeed.getText());
-
+            
             xmlString = Converter.convertFromObjectToXml(gradebook, gradebook.getClass());
+            }catch(NumberFormatException e){
+                    xmlString= null;}
+           }
             
         }
         
@@ -76,9 +80,9 @@ public class Application_UI extends javax.swing.JFrame {
                 gradebook.setId(Integer.parseInt(jTextStudentidField1.getText()));
             }
             gradebook.setFinalgrade(jTextFinalgradeField2.getText());
-            gradebook.setPriority(Integer.parseInt(jTextField4.getText()));
+            gradebook.setPriority(jTextField4.getText());
             
-                //Check for inserting the Assignment, Lab ,quiz, mid, fin
+          try{      //Check for inserting the Assignment, Lab ,quiz, mid, fin
             if (!jTextAssMarks.getText().equals(""))gradebook.setAssignMark(Integer.parseInt(jTextAssMarks.getText()));
             if (!jTextAssFeed.getText().equals(""))gradebook.setAssignFeed(jTextAssFeed.getText());
             if (!jTextClassMrk.getText().equals(""))gradebook.setInclasslabsMark(Integer.parseInt(jTextClassMrk.getText()));
@@ -91,6 +95,8 @@ public class Application_UI extends javax.swing.JFrame {
             if (!jTextFinFeed.getText().equals(""))gradebook.setFinalFeed(jTextFinFeed.getText());
 
              xmlString = Converter.convertFromObjectToXml(gradebook, gradebook.getClass());
+             }catch(NumberFormatException e){
+                    xmlString= null;}
         }
         
         //if READ OR DELETE RADIO BUTTON is selected
@@ -99,7 +105,7 @@ public class Application_UI extends javax.swing.JFrame {
                 gradebook.setId(Integer.parseInt(jTextStudentidField1.getText()));
             }
             gradebook.setFinalgrade(jTextFinalgradeField2.getText());
-            gradebook.setPriority(Integer.parseInt(jTextField4.getText()));
+            gradebook.setPriority(jTextField4.getText());
 
              xmlString = Converter.convertFromObjectToXml(gradebook, gradebook.getClass());
         }
@@ -108,7 +114,27 @@ public class Application_UI extends javax.swing.JFrame {
 
      private void populateForm(ClientResponse clientResponse){
         LOG.info("Populating the UI with the Gradebook info");
-        String      entity = clientResponse.getEntity(String.class);
+        LOG.debug("The Client Response  is {}", clientResponse);
+        String entity, entity1=null;
+      try{
+              entity1 = clientResponse.getEntity(String.class);}
+      catch( UniformInterfaceException e){ 
+          jTextFinalgradeField2.setText("");
+           jTextField4.setText("");
+                jTextAssMarks.setText("");
+                jTextAssFeed.setText("");
+                jTextClassMrk.setText("");
+                jTextClasFeed.setText("");
+                jTextQuizMark.setText("");
+                jTextQuizFeed.setText("");
+                jTextMidtMrk.setText("");
+                jTextMidtFeed.setText("");
+                jTextFinMrk.setText(""); 
+                jTextFinFeed.setText("");
+                
+        }
+       entity=entity1;
+       
         LOG.debug("The Client Response entity is {}", entity);
         
         try{
@@ -131,7 +157,7 @@ public class Application_UI extends javax.swing.JFrame {
                 jTextFinMrk.setText(Integer.toString(gradebook.getFinalMark())); 
                 jTextFinFeed.setText(gradebook.getFinalFeed());
                         
-                jTextField4.setText(Integer.toString(gradebook.getPriority()));
+                jTextField4.setText(gradebook.getPriority());
                 
                 
             } else {
@@ -151,10 +177,11 @@ public class Application_UI extends javax.swing.JFrame {
             
             // Populate HTTP Header Information
             jTextField3.setText(Integer.toString(clientResponse.getStatus()));
-            jTextField6.setText(clientResponse.getType().toString());
-            
+            if (entity != null) {jTextField6.setText(clientResponse.getType().toString());
+            }
             // The Location filed is only populated when a Resource is created
-            if (clientResponse.getStatus() == Response.Status.CREATED.getStatusCode()){
+            if (clientResponse.getStatus() == Response.Status.CREATED.getStatusCode()||clientResponse.getStatus() == Response.Status.OK.getStatusCode()
+                    ||clientResponse.getStatus() == Response.Status.NO_CONTENT.getStatusCode()){
                 jTextField5.setText(clientResponse.getLocation().toString());
             } else {
                 jTextField5.setText("");
@@ -163,7 +190,10 @@ public class Application_UI extends javax.swing.JFrame {
       
         } catch (JAXBException e){
             e.printStackTrace();
+        } catch(NullPointerException e){
+           
         }
+     
     }
      
     /**
@@ -232,7 +262,6 @@ public class Application_UI extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jTextField6 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
         jTextClassMrk = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextStudentidField1 = new javax.swing.JTextField();
@@ -277,6 +306,7 @@ public class Application_UI extends javax.swing.JFrame {
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jTextFinMrk = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
 
         popupMenu1.setLabel("popupMenu1");
 
@@ -764,8 +794,6 @@ public class Application_UI extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setText("Assignment");
-
         jTextClassMrk.setToolTipText("dd/MM/yyyy HH:mm:ss");
         jTextClassMrk.setName("PriorityField"); // NOI18N
         jTextClassMrk.addActionListener(new java.awt.event.ActionListener() {
@@ -774,7 +802,7 @@ public class Application_UI extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Priority");
+        jLabel6.setText("Name*");
 
         jTextStudentidField1.setToolTipText("For Checking existing Entries");
         jTextStudentidField1.setName("IdField"); // NOI18N
@@ -784,6 +812,7 @@ public class Application_UI extends javax.swing.JFrame {
             }
         });
 
+        jTextFinalgradeField2.setToolTipText(null);
         jTextFinalgradeField2.setName("TitleField"); // NOI18N
         jTextFinalgradeField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -972,6 +1001,8 @@ public class Application_UI extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("* Mandatory to Create new Entry");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -991,23 +1022,25 @@ public class Application_UI extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(58, 58, 58)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4))
-                                    .addComponent(jLabel11))
-                                .addGap(38, 38, 38)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFinalgradeField2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextStudentidField1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel3)
+                                                .addComponent(jLabel4)))
+                                        .addGap(143, 143, 143)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jTextFinalgradeField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jTextStudentidField1)))
+                                    .addComponent(jLabel11)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(104, 104, 104)
                                 .addComponent(jLabel2))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(47, 47, 47)
+                .addGap(38, 38, 38)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel40)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1074,7 +1107,7 @@ public class Application_UI extends javax.swing.JFrame {
                         .addComponent(jLabel45)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel46)
@@ -1178,8 +1211,8 @@ public class Application_UI extends javax.swing.JFrame {
                             .addComponent(jRadioButton3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(jRadioButton4)))
+                            .addComponent(jRadioButton4)
+                            .addComponent(jLabel11)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -1195,7 +1228,7 @@ public class Application_UI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(143, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1053, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1375,7 +1408,7 @@ public class Application_UI extends javax.swing.JFrame {
             LOG.debug("Invoking {} action", jRadioButton4.getText());//Delete
 
             ClientResponse clientResponse = gradebook_CRUD_rest_client.deleteGradebook(gradebookID);
-      //       this.populateForm(clientResponse);
+             this.populateForm(clientResponse);
             //have to change response that got from DELETE
         }
     }//GEN-LAST:event_jButton1ActionPerformed

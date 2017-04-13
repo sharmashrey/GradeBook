@@ -83,8 +83,16 @@ public class GradebookResource {
                  }
                 if(IDpresent==1){ //create response code, of unable to create resource since already present
                      response = Response.status(Response.Status.CONFLICT).build(); 
+                  //   return response;
                 }
-                 //--------------------
+                 
+                if(gradebook.getPriority().equals("") ){
+                        LOG.info("NO NAME");
+                        response = Response.status(Response.Status.BAD_REQUEST).entity(content).build();
+                        return response;
+                }
+
+                    //--------------------
                 
                 LOG.info("Creating a {} {} Status Response", Response.Status.CREATED.getStatusCode(), Response.Status.CREATED.getReasonPhrase());
                 

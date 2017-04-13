@@ -34,7 +34,7 @@ public class Gradebook {
     
     private int        id;
     private String      finalgrade;
-    private int         priority;
+    private String         priority;
     
   //  private int        assignment; //check
     
@@ -162,12 +162,12 @@ public class Gradebook {
         LOG.debug("The updated gradebook = {}", this);
     }
 
-    public int getPriority() {
+    public String getPriority() {
         return priority;
     }
 
     @XmlElement
-    public void setPriority(int priority) {
+    public void setPriority(String priority) {
         LOG.info("Setting the priority to {}", priority);
         
         this.priority = priority;
